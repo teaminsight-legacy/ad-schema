@@ -22,8 +22,8 @@ module ActiveDirectory
     end
 
     def define_attributes_types
-      Dir[File.expand_path("../active_directory/attribute_types/*.rb", __FILE__)].each do |filename|
-        require "active_directory/attribute_types/#{File.basename(filename)}"
+      Dir[File.expand_path("../active_directory/attributes/*.rb", __FILE__)].each do |filename|
+        require "active_directory/attributes/#{File.basename(filename)}"
       end
     end
 
