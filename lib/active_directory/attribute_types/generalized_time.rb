@@ -13,9 +13,9 @@ module ActiveDirectory
         entry.meta_class.class_eval <<-APPLY_READ
 
           def #{self.attribute.name}
-            unless @#{self.attribute_name}
+            unless @#{self.attribute.name}
               value = (self.fields["#{self.attribute.ldap_name}"] || []).first
-              generalized_time = ActiveDirectory::Attributes::GeneralizedTime.new(new_value)
+              generalized_time = ActiveDirectory::Attributes::GeneralizedTime.new(value)
               @#{self.attribute.name} = generalized_time.to_time
             end
             @#{self.attribute.name}
@@ -42,7 +42,4 @@ module ActiveDirectory
   end
 end
 
-ActiveDirectory.config.register_attribute_type(ActiveDirectory::AttributeTypes::String)
-
-# For Generalized Time
-# => (\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})
+ActiveDirectory.config.register_attribute_type(ActiveDirectory::AttributeTypes::GeneralizedTime)

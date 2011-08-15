@@ -7,10 +7,12 @@ module ActiveDirectory
     class Array < ActiveDirectory::AttributeTypes::Base
 
       key "array"
-      
+
       def items_class
         @items_class ||= case(self.attribute.name.to_sym)
           when :proxy_addresses
+            String
+          else
             String
         end
       end
@@ -21,7 +23,7 @@ module ActiveDirectory
           def #{self.attribute.name}
             unless @#{self.attribute.name}
               values = (self.fields["#{self.attribute.ldap_name}"] || []).first
-              @#{self.attribute.name} = values.collect do |value| 
+              @#{self.attribute.name} = values.collect do |value|
                 #{self.attribute.attribute_type.items_class}.new(value)
               end
             end

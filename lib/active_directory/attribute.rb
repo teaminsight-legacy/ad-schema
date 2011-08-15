@@ -12,7 +12,7 @@ module ActiveDirectory
       if attribute_type_klass
         self.attribute_type = attribute_type_klass.new(self)
       else
-        raise(ActiveDirectory::NoAttributeTypeError, "There is no attribute type with the key #{attribute_type.inspect}")
+        # raise(ActiveDirectory::NoAttributeTypeError, "There is no attribute type with the key #{attribute_type.inspect}")
       end
     end
 
@@ -31,7 +31,7 @@ module ActiveDirectory
       attrs_display = [ :name, :ldap_name ].collect do |name|
         "#{name}: #{self.send(name).inspect}"
       end
-      attrs_display.push("attribute_type: #{self.attribute_type.class.key.inspect}")
+      attrs_display.push("attribute_type: #{self.attribute_type.class.key.inspect}") if self.attribute_type
       [ "#<#{self.class} ", attrs_display.join(", "), ">" ].join
     end
 

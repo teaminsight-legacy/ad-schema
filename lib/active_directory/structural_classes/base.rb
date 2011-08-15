@@ -24,10 +24,11 @@ module ActiveDirectory
       end
 
       def inspect
-        attr_display = self.schema.attribute_needs[:read].collect do |name|
-          "#{name}: #{self.send(name).inspect}"
-        end
-        [ "#<#{self.class} ", attr_display.join(", "), ">" ].join
+        # attr_display = self.schema.attribute_needs[:read].collect do |name|
+        #   "#{name}: #{self.send(name).inspect}"
+        # end
+        # [ "#<#{self.class} ", attr_display.join(", "), ">" ].join
+        self.class.to_s
       end
 
     end

@@ -44,7 +44,7 @@ module ActiveDirectory
         keys = [ self.attribute_needs[:read].to_a, self.attribute_needs[:write].to_a ].flatten.uniq
         self.attributes = (keys.collect do |name|
           if !(attribute = ActiveDirectory.config.attributes[name])
-            raise(ActiveDirectory::NoAttributeError, "An attribute with the name #{name} is not defined")
+            # raise(ActiveDirectory::NoAttributeError, "An attribute with the name #{name} is not defined")
           end
           attribute
         end).compact
