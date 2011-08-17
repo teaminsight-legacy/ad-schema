@@ -10,35 +10,40 @@ module ActiveDirectory
       end
       self.type_klass = ActiveDirectory.config.attribute_types[attribute_type]
       unless self.type_klass
+        puts attribute_type
         # raise(ActiveDirectory::NoAttributeTypeError, "There is no attribute type with the key #{attribute_type.inspect}")
       end
     end
 
     def apply_read(entry)
-      entry.meta_class.class_eval <<-APPLY_READ
+      if self.type_klass
+        entry.meta_class.class_eval <<-APPLY_READ
 
-        def #{self.name}
-          unless @#{self.name}
-            value = (self.fields["#{self.ldap_name}"] || []).first
-            type_instance = ActiveDirectory::Attributes::#{self.type_klass}.new(value, "#{self.name}")
-            @#{self.name} = type_instance.value
+          def #{self.name}
+            unless @#{self.name}
+              value = (self.fields["#{self.ldap_name}"] || []).first
+              type_instance = #{self.type_klass}.new(value, "#{self.name}")
+              @#{self.name} = type_instance.value
+            end
+            @#{self.name}
           end
-          @#{self.name}
-        end
 
-      APPLY_READ
+        APPLY_READ
+      end
     end
     def apply_write(entry)
-      entry.meta_class.class_eval <<-APPLY_WRITE
+      if self.type_klass
+        entry.meta_class.class_eval <<-APPLY_WRITE
 
-        def #{self.name}=(new_value)
-          type_instance = ActiveDirectory::Attributes::#{self.type_klass}.new(new_value, "#{self.name}")
-          @#{self.name} = type_instance.value
-          self.fields["#{self.ldap_name}"] = [ *type_instance.ldap_value ].compact
-          self.#{self.name}
-        end
+          def #{self.name}=(new_value)
+            type_instance = #{self.type_klass}.new(new_value, "#{self.name}")
+            @#{self.name} = type_instance.value
+            self.fields["#{self.ldap_name}"] = [ *type_instance.ldap_value ].compact
+            self.#{self.name}
+          end
 
-      APPLY_WRITE
+        APPLY_WRITE
+      end
     end
 
     def inspect

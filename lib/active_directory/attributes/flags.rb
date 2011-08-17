@@ -31,6 +31,8 @@ module ActiveDirectory
           :can_be_moved_with_restrictions =>  0x10000000,
           :can_be_moved =>                    0x20000000,
           :can_be_renamed =>                  0x40000000,
+        },
+        :user_account_control => {
         }
       }
 

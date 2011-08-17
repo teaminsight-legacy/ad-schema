@@ -52,7 +52,7 @@ ActiveDirectory::ATTRIBUTE_DEFINITIONS = [
   { :name => "profile_path", :ldap_name => "profilepath", :attribute_type => "string" },
   { :name => "password_last_set_at", :ldap_name => "pwdlastset", :attribute_type => "timestamp" },
   { :name => "script_path", :ldap_name => "scriptpath", :attribute_type => "string" },
-  { :name => "service_principal_names", :ldap_name => "serviceprincipalname", :attribute_type => "strings" },
+  { :name => "service_principal_names", :ldap_name => "serviceprincipalname", :attribute_type => "array" },
   { :name => "unicode_password", :ldap_name => "unicodepwd", :attribute_type => "unicode_password" },
   { :name => "account_control", :ldap_name => "useraccountcontrol", :attribute_type => "user_account_control" },
   { :name => "parameters", :ldap_name =>  "userparameters", :attribute_type => "string" },
