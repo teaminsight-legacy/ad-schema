@@ -1,3 +1,5 @@
+require 'ad-framework'
+
 require 'active_directory/config'
 require 'active_directory/connection'
 require 'active_directory/exceptions'
