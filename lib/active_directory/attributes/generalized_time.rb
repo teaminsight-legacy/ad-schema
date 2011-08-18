@@ -1,29 +1,26 @@
 require 'time'
-require 'active_directory/attributes/base'
+require 'ad-framework/attribute_type'
 
 module ActiveDirectory
   module Attributes
 
-    class GeneralizedTime < ActiveDirectory::Attributes::Base
+    class GeneralizedTime < AD::Framework::AttributeType
       key "generalized_time"
 
-      attr_accessor :value
-
-      def initialize(value, key)
-        self.value = case value.class
+      def value=(new_value)
+        value = case new_value.class
         when Time
-          value.utc
+          new_value.utc
         else
-          if value
-            Time.parse(value.to_s).utc
+          if new_value
+            Time.parse(new_value.to_s).utc
           end
         end
+        super(value)
       end
 
-      def ldap_value
-        if self.value
-          self.value.utc.iso8601.gsub(/[-|:|T]/, '').gsub(/Z$/, '.0Z')
-        end
+      def ldap_value=(new_value)
+        super(new_value.utc.iso8601.gsub(/[-|:|T]/, '').gsub(/Z$/, '.0Z'))
       end
 
     end
@@ -31,4 +28,4 @@ module ActiveDirectory
   end
 end
 
-ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::GeneralizedTime)
+AD::Framework.register_attribute_type(ActiveDirectory::Attributes::GeneralizedTime)

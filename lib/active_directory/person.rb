@@ -1,4 +1,4 @@
-require 'active_directory/structural_classes/top'
+require 'active_directory/top'
 
 module ActiveDirectory
 
@@ -6,7 +6,7 @@ module ActiveDirectory
   class Person < ActiveDirectory::Top
 
     ldap_name "person"
-    
+
     rdn :name
 
     attributes :last_name, :phone_number
@@ -19,4 +19,4 @@ module ActiveDirectory
 
 end
 
-ActiveDirectory.config.register_object_class(ActiveDirectory::Person)
+AD::Framework.register_structural_class(ActiveDirectory::Person)

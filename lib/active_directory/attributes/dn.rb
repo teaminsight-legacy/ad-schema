@@ -1,20 +1,13 @@
-require 'active_directory/attributes/base'
+require 'ad-framework/attribute_type'
 
 module ActiveDirectory
   module Attributes
 
-    class Dn < ActiveDirectory::Attributes::Base
+    class Dn < AD::Framework::AttributeType
       key "dn"
-
-      attr_accessor :value, :ldap_value
-
-      def initialize(value, key)
-        self.value = self.ldap_value = value
-      end
-
     end
 
   end
 end
 
-ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::Dn)
+AD::Framework.register_attribute_type(ActiveDirectory::Attributes::Dn)

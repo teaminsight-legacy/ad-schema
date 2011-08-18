@@ -1,4 +1,4 @@
-require 'active_directory/structural_classes/organizational_person'
+require 'active_directory/organizational_person'
 #require 'active_directory/auxillary_classes/posix_account'
 #require 'active_directory/auxillary_classes/shadow_account'
 #require 'active_directory/auxillary_classes/mail_recipient'
@@ -28,4 +28,4 @@ module ActiveDirectory
 
 end
 
-ActiveDirectory.config.register_object_class(ActiveDirectory::User)
+AD::Framework.register_structural_class(ActiveDirectory::User)

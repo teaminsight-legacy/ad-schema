@@ -1,4 +1,4 @@
-require 'active_directory/structural_classes/person'
+require 'active_directory/person'
 
 module ActiveDirectory
 
@@ -16,4 +16,4 @@ module ActiveDirectory
 
 end
 
-ActiveDirectory.config.register_object_class(ActiveDirectory::OrganizationalPerson)
+AD::Framework.register_structural_class(ActiveDirectory::OrganizationalPerson)

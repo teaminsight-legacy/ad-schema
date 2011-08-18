@@ -1,20 +1,20 @@
-require 'active_directory/attributes/base'
+require 'ad-framework/attribute_type'
 
 module ActiveDirectory
   module Attributes
 
-    class Timestamp < ActiveDirectory::Attributes::Base
+    class Timestamp < AD::Framework::AttributeType
       key "timestamp"
 
       attr_accessor :value
 
-      def initialize(value, key)
-        self.value = convert(value.to_i)
+      def value=(new_value)
+        super(convert(new_value.to_i))
       end
 
-      def ldap_value
+      def ldap_value=(new_value)
         # Nanosecond remainder is lost in conversion.
-        (self.value.to_i * 10000000) + unix_time
+        super((new_value.to_i * 10000000) + unix_time)
       end
 
       protected
@@ -32,4 +32,4 @@ module ActiveDirectory
   end
 end
 
-ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::Timestamp)
+AD::Framework.register_attribute_type(ActiveDirectory::Attributes::Timestamp)

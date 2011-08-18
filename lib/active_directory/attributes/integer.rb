@@ -1,19 +1,13 @@
-require 'active_directory/attributes/base'
+require 'ad-framework/attribute_type'
 
 module ActiveDirectory
   module Attributes
 
-    class Integer < ActiveDirectory::Attributes::Base
+    class Integer < AD::Framework::AttributeType
       key "integer"
 
-      attr_accessor :value
-
-      def initialize(value, key)
-        self.value = value ? value.to_i : nil
-      end
-
-      def ldap_value
-        self.value.to_s
+      def value=(new_value)
+        super(new_value.to_i)
       end
 
     end
@@ -21,4 +15,4 @@ module ActiveDirectory
   end
 end
 
-ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::Integer)
+AD::Framework.register_attribute_type(ActiveDirectory::Attributes::Integer)

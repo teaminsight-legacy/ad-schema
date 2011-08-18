@@ -1,16 +1,16 @@
-require 'active_directory/attributes/base'
+require 'active_directory/attributes/integer'
 require 'active_directory/attributes/boolean'
 
 module ActiveDirectory
   module Attributes
 
-    class Flags < ActiveDirectory::Attributes::Base
+    class Flags < ActiveDirectory::Attributes::Integer
       key "flags"
 
-      attr_accessor :ldap_value, :meta_class
+      attr_accessor :meta_class
 
       VALUES = {
-        :system_flags => {
+        :systemflags => {
           # Attribute flags
           :not_replicated =>                  0x00000001,
           :replicated_to_global_catalog =>    0x00000002,
@@ -32,7 +32,7 @@ module ActiveDirectory
           :can_be_moved =>                    0x20000000,
           :can_be_renamed =>                  0x40000000,
         },
-        :account_control => {
+        :useraccountcontrol => {
           :execute_logon_script =>                0x00000001,
           :disabled =>                            0x00000002,
           :home_directory_required =>             0x00000008,
@@ -57,22 +57,21 @@ module ActiveDirectory
         }
       }
 
-      def initialize(value, key)
+      def initialize(object, attr_ldap_name, value)
         self.meta_class = class << self; self; end
-        self.ldap_value = value.to_i
-        VALUES[key.to_sym].each do |(name, bit)|
+        VALUES[attr_ldap_name.to_sym].each do |(name, bit)|
 
           self.meta_class.class_eval <<-FLAG_METHODS
 
             def #{name}
-              (self.ldap_value & #{bit}) != 0
+              (@value & #{bit}) != 0
             end
 
             def #{name}=(new_value)
               boolean = ActiveDirectory::Attributes::Boolean.new(new_value).value
               current = self.#{name}
               if boolean ^ current
-                self.ldap_value = (self.ldap_value ^ #{bit})
+                self.value = (@value ^ #{bit})
               end
               self.#{name}
             end
@@ -80,6 +79,7 @@ module ActiveDirectory
           FLAG_METHODS
 
         end
+        super
       end
 
       def value
@@ -91,4 +91,4 @@ module ActiveDirectory
   end
 end
 
-ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::Flags)
+AD::Framework.register_attribute_type(ActiveDirectory::Attributes::Flags)
