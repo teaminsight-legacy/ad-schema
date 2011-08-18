@@ -1,10 +1,12 @@
 require 'ad-framework/patterns/has_schema'
+require 'ad-framework/patterns/searchable'
 
 module AD
   module Framework
 
     class StructuralClass
       include AD::Framework::Patterns::HasSchema
+      include AD::Framework::Patterns::Searchable
 
       attr_accessor :meta_class, :errors, :fields
 
