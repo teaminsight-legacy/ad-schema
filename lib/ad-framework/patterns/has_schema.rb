@@ -19,11 +19,7 @@ module AD
         module InstanceMethods
 
           def schema
-            unless @schema
-              @schema = self.class.schema.dup
-              @schema.build_for(self)
-            end
-            @schema
+            self.class.schema
           end
 
           def attributes
@@ -58,15 +54,15 @@ module AD
           end
 
           def attributes(*attribute_names)
-            self.schema.add_rw_attribute_needs(attribute_names)
-          end
-
-          def write_attributes(*attribute_names)
-            self.schema.add_w_attribute_needs(attribute_names)
+            self.schema.add_attributes(attribute_names)
           end
 
           def read_attributes(*attribute_names)
-            self.schema.add_r_attribute_needs(attribute_names)
+            self.schema.add_read_attributes(attribute_names)
+          end
+
+          def write_attributes(*attribute_names)
+            self.schema.add_write_attributes(attribute_names)
           end
 
         end

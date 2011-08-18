@@ -7,6 +7,9 @@ module AD
         def [](lookup)
           super(lookup.to_sym)
         end
+        def find(lookup)
+          self[lookup]
+        end
       
         def []=(lookup, object)
           super(lookup.to_sym, object)

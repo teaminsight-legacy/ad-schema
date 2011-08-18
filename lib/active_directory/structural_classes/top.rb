@@ -10,7 +10,7 @@ module ActiveDirectory
 
     rdn :name
 
-    attributes :dn, :name, :system_flags, :display_name, :description, :proxy_addresses,
+    attributes :name, :system_flags, :display_name, :description, :proxy_addresses,
       :when_created, :when_changed, :admin_display_name, :admin_description, :unix_member_of
 
   end
