@@ -54,7 +54,7 @@ ActiveDirectory::ATTRIBUTE_DEFINITIONS = [
   { :name => "script_path", :ldap_name => "scriptpath", :attribute_type => "string" },
   { :name => "service_principal_names", :ldap_name => "serviceprincipalname", :attribute_type => "array" },
   { :name => "unicode_password", :ldap_name => "unicodepwd", :attribute_type => "unicode_password" },
-  { :name => "account_control", :ldap_name => "useraccountcontrol", :attribute_type => "user_account_control" },
+  { :name => "account_control", :ldap_name => "useraccountcontrol", :attribute_type => "flags" },
   { :name => "parameters", :ldap_name =>  "userparameters", :attribute_type => "string" },
   { :name => "principal_name", :ldap_name => "userprincipalname", :attribute_type => "string" },
   { :name => "uid", :ldap_name => "uid", :attribute_type => "string" },

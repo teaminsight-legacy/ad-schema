@@ -20,7 +20,7 @@ module ActiveDirectory
       :script_path, :account_control, :parameters, :principal_name, :uid
 
     read_attributes :admin_count, :last_bad_password_at, :bad_password_count, :last_logged_in_at,
-      :logged_in_count, :primary_group_id, :password_last_set_at, :service_principal_name
+      :logged_in_count, :primary_group_id, :password_last_set_at, :service_principal_names
 
     write_attributes :unicode_password
 

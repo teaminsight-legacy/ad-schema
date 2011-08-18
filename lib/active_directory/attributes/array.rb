@@ -17,7 +17,7 @@ module ActiveDirectory
           ActiveDirectory::Attributes::String
         end
         self.values = [*values].collect do |value|
-          value_type.new(value)
+          value_type.new(value, key)
         end
       end
 
@@ -27,6 +27,23 @@ module ActiveDirectory
 
       def ldap_value
         [*self.values].collect(&:ldap_value)
+      end
+
+      class << self
+        def apply_read(attribute, entry)
+          entry.meta_class.class_eval <<-APPLY_READ
+
+            def #{attribute.name}
+              unless @#{attribute.name}
+                value = (self.fields["#{attribute.ldap_name}"] || [])
+                type_instance = #{attribute.type_klass}.new(value, "#{attribute.name}")
+                @#{attribute.name} = type_instance.value
+              end
+              @#{attribute.name}
+            end
+
+          APPLY_READ
+        end
       end
 
     end

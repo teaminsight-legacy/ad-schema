@@ -13,7 +13,9 @@ module ActiveDirectory
       end
 
       def ldap_value
-        self.value.to_s
+        if self.value
+          self.value.inspect.split('').collect{|c| "#{c}\000"}.join
+        end
       end
 
     end
@@ -21,4 +23,4 @@ module ActiveDirectory
   end
 end
 
-# ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::UnicodePassword)
+ActiveDirectory.config.register_attribute_type(ActiveDirectory::Attributes::UnicodePassword)
