@@ -1,1 +1,2 @@
-require "active_directory"
+require 'ad-framework'
+#require 'active_directory'

@@ -1,5 +1,5 @@
-module ActiveDirectory
-  module Entry
+module AD
+  module Framework
 
     class Schema
       attr_accessor :ldap_name, :rdn
