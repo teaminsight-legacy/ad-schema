@@ -20,7 +20,9 @@ module ActiveDirectory
       protected
 
       def convert(val)
-        Time.at((val - unix_time) / 10000000).utc
+        unless val.zero? || val == 0x7FFFFFFFFFFFFFFF
+          Time.at((val - unix_time) / 10000000).utc
+        end
       end
 
       def unix_time
