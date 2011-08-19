@@ -22,7 +22,9 @@ module ActiveDirectory
       # TODO: explain what is being done here, how we are converting from windows ticks to
       # unix timestamp and back
       def convert(val)
-        Time.at((val - unix_time) / 10000000).utc
+        unless val.zero? || val == 0x7FFFFFFFFFFFFFFF
+          Time.at((val - unix_time) / 10000000).utc
+        end
       end
 
       def unix_time
