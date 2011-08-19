@@ -19,6 +19,8 @@ module ActiveDirectory
 
       protected
 
+      # TODO: explain what is being done here, how we are converting from windows ticks to
+      # unix timestamp and back
       def convert(val)
         Time.at((val - unix_time) / 10000000).utc
       end

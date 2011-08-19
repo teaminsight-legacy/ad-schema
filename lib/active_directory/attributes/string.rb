@@ -7,7 +7,7 @@ module ActiveDirectory
       key "string"
 
       def value=(new_value)
-        super(new_value.to_s)
+        super(new_value ? new_value.to_s : new_value)
       end
 
     end

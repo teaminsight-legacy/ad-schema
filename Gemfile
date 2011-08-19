@@ -4,5 +4,5 @@ source "http://rubygems.org"
 gemspec
 
 gem 'rake', '~>0.9.2'
-gem 'ad-framework', :path => "~/Source/gems/ad-framework"
+gem 'ad-framework', :git => "git@github.com:teaminsight/ad-framework.git", :branch => "master"
 gem "ad-ldap", :git => "git@github.com:teaminsight/ad-ldap.git", :branch => "master"

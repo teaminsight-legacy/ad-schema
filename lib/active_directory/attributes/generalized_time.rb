@@ -8,19 +8,24 @@ module ActiveDirectory
       key "generalized_time"
 
       def value=(new_value)
-        value = case new_value.class
+        parsed_value = case new_value
         when Time
           new_value.utc
         else
-          if new_value
-            Time.parse(new_value.to_s).utc
-          end
+          Time.parse(new_value.to_s).utc if new_value
         end
-        super(value)
+        super(parsed_value)
       end
 
       def ldap_value=(new_value)
-        super(new_value.utc.iso8601.gsub(/[-|:|T]/, '').gsub(/Z$/, '.0Z'))
+        super(self.windows_time_string(new_value))
+      end
+
+      protected
+
+      # TODO: explain what's being done here, removing punctuation and adding the .0Z
+      def windows_time_string(time)
+        time.utc.iso8601.gsub(/[-|:|T]/, '').gsub(/Z$/, '.0Z')
       end
 
     end

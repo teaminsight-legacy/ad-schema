@@ -9,6 +9,43 @@ module ActiveDirectory
 
       attr_accessor :meta_class
 
+      def initialize(object, attr_ldap_name)
+        self.meta_class = class << self; self; end
+        self.accepted_values = VALUES[attr_ldap_name.to_sym]
+        super
+
+        self.define_value_methods!
+      end
+
+      def value
+        self
+      end
+
+      protected
+
+      # TODO: describe what this is doing, using the meta class to define methods just for this
+      # instance, blah blah blah
+      def define_value_methods!
+        self.accepted_values.each do |(name, bit)|
+          self.meta_class.class_eval <<-FLAG_METHODS
+
+            def #{name}
+              ((@value || 0) & #{bit}) != 0
+            end
+
+            def #{name}=(new_value)
+              boolean = ActiveDirectory::Attributes::Boolean.new(new_value).value
+              current = self.#{name}
+              if boolean ^ current
+                self.value = ((@value || 0) ^ #{bit})
+              end
+              self.#{name}
+            end
+
+          FLAG_METHODS
+        end
+      end
+
       VALUES = {
         :systemflags => {
           # Attribute flags
@@ -56,35 +93,6 @@ module ActiveDirectory
           :authenticate_for_delegation_trusted => 0x01000000,
         }
       }
-
-      def initialize(object, attr_ldap_name, value)
-        self.meta_class = class << self; self; end
-        VALUES[attr_ldap_name.to_sym].each do |(name, bit)|
-
-          self.meta_class.class_eval <<-FLAG_METHODS
-
-            def #{name}
-              (@value & #{bit}) != 0
-            end
-
-            def #{name}=(new_value)
-              boolean = ActiveDirectory::Attributes::Boolean.new(new_value).value
-              current = self.#{name}
-              if boolean ^ current
-                self.value = (@value ^ #{bit})
-              end
-              self.#{name}
-            end
-
-          FLAG_METHODS
-
-        end
-        super
-      end
-
-      def value
-        self
-      end
 
     end
 

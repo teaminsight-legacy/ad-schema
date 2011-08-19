@@ -7,7 +7,7 @@ module ActiveDirectory
       key "integer"
 
       def value=(new_value)
-        super(new_value.to_i)
+        super(new_value ? new_value.to_i : new_value)
       end
 
     end
