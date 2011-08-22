@@ -18,5 +18,7 @@ Gem::Specification.new do |s|
 
   #s.add_runtime_dependency "ad-ldap" # TODO: lock down ad-ldap version
 
-  s.add_development_dependency "assert" # TODO: lock down assert version
+  s.add_development_dependency "assert",  "~>0.2.0"
+  s.add_development_dependency "log4r",   "~>1.1.9"
+  s.add_development_dependency "mocha",   "=0.9.12"
 end

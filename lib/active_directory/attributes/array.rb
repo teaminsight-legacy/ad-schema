@@ -9,7 +9,7 @@ module ActiveDirectory
 
       attr_accessor :item_class
 
-      def initialize(object, attr_ldap_name, values)
+      def initialize(object, attr_ldap_name)
         self.item_class = case attr_ldap_name.to_sym
         when :proxyaddresses
           ActiveDirectory::Attributes::String
@@ -18,7 +18,7 @@ module ActiveDirectory
         end
         super
       end
-      
+
       def value_from_field
         (self.object.fields[self.attr_ldap_name] || [])
       end
@@ -29,7 +29,7 @@ module ActiveDirectory
 
       def value=(new_value)
         values = [*new_value].collect do |value|
-          self.item_class.new(object, attr_ldap_name)
+          self.item_class.new(object, attr_ldap_name, value)
         end
         super(values.compact)
       end

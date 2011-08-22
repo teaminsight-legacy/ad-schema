@@ -25,7 +25,7 @@ module ActiveDirectory
 
       # TODO: explain what's being done here, removing punctuation and adding the .0Z
       def windows_time_string(time)
-        time.utc.iso8601.gsub(/[-|:|T]/, '').gsub(/Z$/, '.0Z')
+        time.utc.iso8601.gsub(/[-|:|T]/, '').gsub(/Z$/, '.0Z') if time
       end
 
     end
