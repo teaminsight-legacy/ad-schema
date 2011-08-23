@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "active_directory/version"
+require "ad-schema/version"
 
 Gem::Specification.new do |s|
   s.name        = "ad-schema"
-  s.version     = ActiveDirectory::VERSION
+  s.version     = AD::Schema::VERSION
   s.authors     = ["jcredding"]
   s.email       = ["TempestTTU@gmail.com"]
   s.homepage    = ""

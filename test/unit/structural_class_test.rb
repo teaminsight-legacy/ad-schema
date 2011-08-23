@@ -9,7 +9,7 @@ class StructuralClassTest < Assert::Context
     @person_write_attrs = [:'password=']
     @orginizational_person_attrs = [:address, :home_address, :assistant_dn, :company_name,
       :country_code, :country_name, :department, :division, :email, :employee_id, :fax_number,
-      :generation_qualifier, :first_name, :initials, :locality_name, :manager_dn, :organizational_unit,
+      :generation, :first_name, :initials, :locality_name, :manager_dn, :organizational_unit,
       :other_mailbox, :middle_name]
     @user_attrs = [:account_expires, :home_directory, :home_drive, :locked_out_at, :profile_path,
       :script_path, :account_control, :parameters, :principal_name, :uid]

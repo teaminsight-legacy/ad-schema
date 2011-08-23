@@ -12,3 +12,21 @@ require 'ad-schema'
 class Assert::Context
   include Mocha::API
 end
+
+module Factory
+  extend Mocha::API
+
+  class << self
+
+    def mock_object(methods = {})
+      methods[:dn] ||= 'CN=something, DC=example, DC=com'
+      methods[:fields] ||= {}
+      object = mock()
+      methods.each do |name, value|
+        object.stubs(name).returns(value)
+      end
+      object
+    end
+
+  end
+end
