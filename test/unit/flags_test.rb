@@ -106,6 +106,14 @@ class ActiveDirectory::Attributes::Flags
       subject.disabled = true
       assert_equal expected, subject.ldap_value
     end
+
+    should "turn non-false values into true" do
+      expected = true
+      value = subject.send(:to_boolean, true)
+      assert_equal expected, value
+      value = subject.send(:to_boolean, 'foobar')
+      assert_equal expected, value
+    end
   end
 
   class FalseBitTest < Assert::Context
@@ -124,6 +132,12 @@ class ActiveDirectory::Attributes::Flags
       expected = 0
       subject.disabled = false
       assert_equal expected, subject.ldap_value
+    end
+
+    should "turn nil values into false" do
+      expected = false
+      value = subject.send(:to_boolean, nil)
+      assert_equal expected, value
     end
   end
 

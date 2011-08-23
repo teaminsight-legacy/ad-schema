@@ -23,6 +23,14 @@ module ActiveDirectory
 
       protected
 
+      def to_boolean(new_value)
+        new_value = !!new_value
+        @converter ||= ActiveDirectory::Attributes::Boolean.new(self.object, self.attr_ldap_name, new_value)
+        @converter.value = new_value
+        @converter.value
+      end
+
+
       # TODO: describe what this is doing, using the meta class to define methods just for this
       # instance, blah blah blah
       def define_value_methods!
@@ -34,7 +42,7 @@ module ActiveDirectory
             end
 
             def #{name}=(new_value)
-              boolean = ActiveDirectory::Attributes::Boolean.new(new_value).value
+              boolean = self.to_boolean(new_value)
               current = self.#{name}
               if boolean ^ current
                 self.value = ((@value || 0) ^ #{bit})

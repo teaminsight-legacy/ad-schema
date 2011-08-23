@@ -7,7 +7,7 @@ class IntegerTest < Assert::Context
     @value = [1]
     @object = mock()
     @object.stubs(:dn).returns('something')
-    @object.stubs(:fields).returns({ @attr_ldap_name => @values })
+    @object.stubs(:fields).returns({ @attr_ldap_name => @value })
     @integer = ActiveDirectory::Attributes::Integer.new(@object, @attr_ldap_name)
   end
   subject{ @integer }
