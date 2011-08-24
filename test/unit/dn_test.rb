@@ -8,7 +8,7 @@ class DnTest < Assert::Context
     @object = mock()
     @object.stubs(:dn).returns('something')
     @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-    @dn = ActiveDirectory::Attributes::Dn.new(@object, @attr_ldap_name)
+    @dn = AD::Schema::AttributeTypes::Dn.new(@object, @attr_ldap_name)
   end
   subject{ @dn }
 

@@ -20,9 +20,9 @@ class StructuralClassTest < Assert::Context
   end
 
   class TopTest < StructuralClassTest
-    desc "an ActiveDirectory::Top"
+    desc "an AD::Schema::Top"
     setup do
-      @structural_class = ActiveDirectory::Top
+      @structural_class = AD::Schema::Top
     end
     subject{ @structural_class }
 
@@ -36,9 +36,9 @@ class StructuralClassTest < Assert::Context
   end
 
   class PersonTest < StructuralClassTest
-    desc "an ActiveDirectory::Person"
+    desc "an AD::Schema::Person"
     setup do
-      @structural_class = ActiveDirectory::Person.new
+      @structural_class = AD::Schema::Person.new
     end
     subject{ @structural_class }
 
@@ -64,9 +64,9 @@ class StructuralClassTest < Assert::Context
   end
 
   class OrganizationalPersonTest < StructuralClassTest
-    desc "an ActiveDirectory::OrganizationalPerson"
+    desc "an AD::Schema::OrganizationalPerson"
     setup do
-      @structural_class = ActiveDirectory::OrganizationalPerson.new
+      @structural_class = AD::Schema::OrganizationalPerson.new
     end
     subject{ @structural_class }
 
@@ -92,9 +92,9 @@ class StructuralClassTest < Assert::Context
   end
 
   class UserTest < StructuralClassTest
-    desc "an ActiveDirectory::User"
+    desc "an AD::Schema::User"
     setup do
-      @structural_class = ActiveDirectory::User.new
+      @structural_class = AD::Schema::User.new
     end
     subject{ @structural_class }
 

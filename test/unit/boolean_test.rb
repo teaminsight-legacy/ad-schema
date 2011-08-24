@@ -8,7 +8,7 @@ class BooleanTest < Assert::Context
     @object = mock()
     @object.stubs(:dn).returns('something')
     @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-    @boolean = ActiveDirectory::Attributes::Boolean.new(@object, @attr_ldap_name)
+    @boolean = AD::Schema::AttributeTypes::Boolean.new(@object, @attr_ldap_name)
   end
   subject{ @boolean }
 

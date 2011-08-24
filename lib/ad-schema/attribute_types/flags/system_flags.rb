@@ -7,7 +7,7 @@ module AD
 
         module SystemFlags
 
-          def system_flag_values
+          def system_flags_values
             { :systemflags => {
                 # Attribute flags
                 :not_replicated =>                  0x00000001,

@@ -1,6 +1,6 @@
 require 'assert'
 
-class ActiveDirectory::Attributes::Flags
+class AD::Schema::AttributeTypes::Flags
 
   class BaseTest < Assert::Context
     desc "the flags class"
@@ -10,10 +10,10 @@ class ActiveDirectory::Attributes::Flags
       @object = mock()
       @object.stubs(:dn).returns('something')
       @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-      @current_defined_values = ActiveDirectory::Attributes::Flags.defined_values.dup
-      ActiveDirectory::Attributes::Flags.instance_variable_set("@defined_values", nil)
-      ActiveDirectory::Attributes::Flags.defined_values.stubs(:[]).with(:test).returns([])
-      @flags = ActiveDirectory::Attributes::Flags.new(@object, @attr_ldap_name)
+      @current_defined_values = AD::Schema::AttributeTypes::Flags.defined_values.dup
+      AD::Schema::AttributeTypes::Flags.instance_variable_set("@defined_values", nil)
+      AD::Schema::AttributeTypes::Flags.defined_values.stubs(:[]).with(:test).returns([])
+      @flags = AD::Schema::AttributeTypes::Flags.new(@object, @attr_ldap_name)
     end
     subject{ @flags }
 
@@ -24,7 +24,7 @@ class ActiveDirectory::Attributes::Flags
     end
 
     teardown do
-      ActiveDirectory::Attributes::Flags.instance_variable_set("@defined_values", @current_defined_values)
+      AD::Schema::AttributeTypes::Flags.instance_variable_set("@defined_values", @current_defined_values)
     end
   end
 
@@ -42,7 +42,7 @@ class ActiveDirectory::Attributes::Flags
       @object = mock()
       @object.stubs(:dn).returns('something')
       @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-      @system_flags = ActiveDirectory::Attributes::Flags.new(@object, @attr_ldap_name)
+      @system_flags = AD::Schema::AttributeTypes::Flags.new(@object, @attr_ldap_name)
     end
     subject{ @system_flags }
 
@@ -73,7 +73,7 @@ class ActiveDirectory::Attributes::Flags
       @object = mock()
       @object.stubs(:dn).returns('something')
       @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-      @account_control = ActiveDirectory::Attributes::Flags.new(@object, @attr_ldap_name)
+      @account_control = AD::Schema::AttributeTypes::Flags.new(@object, @attr_ldap_name)
     end
     subject{ @account_control }
 
@@ -97,7 +97,7 @@ class ActiveDirectory::Attributes::Flags
       @object = mock()
       @object.stubs(:dn).returns('something')
       @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-      @account_control = ActiveDirectory::Attributes::Flags.new(@object, @attr_ldap_name)
+      @account_control = AD::Schema::AttributeTypes::Flags.new(@object, @attr_ldap_name)
     end
     subject{ @account_control }
 
@@ -124,7 +124,7 @@ class ActiveDirectory::Attributes::Flags
       @object = mock()
       @object.stubs(:dn).returns('something')
       @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-      @account_control = ActiveDirectory::Attributes::Flags.new(@object, @attr_ldap_name)
+      @account_control = AD::Schema::AttributeTypes::Flags.new(@object, @attr_ldap_name)
     end
     subject{ @account_control }
 

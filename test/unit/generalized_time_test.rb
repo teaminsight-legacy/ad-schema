@@ -8,7 +8,7 @@ class GeneralizedTimeTest < Assert::Context
     @object = mock()
     @object.stubs(:dn).returns('something')
     @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-    @generalized_time = ActiveDirectory::Attributes::GeneralizedTime.new(@object, @attr_ldap_name)
+    @generalized_time = AD::Schema::AttributeTypes::GeneralizedTime.new(@object, @attr_ldap_name)
   end
   subject{ @generalized_time }
 

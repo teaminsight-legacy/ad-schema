@@ -8,7 +8,7 @@ class UnicodePasswordTest < Assert::Context
     @object = mock()
     @object.stubs(:dn).returns('something')
     @object.stubs(:fields).returns({ @attr_ldap_name => @value })
-    @unicode_password = ActiveDirectory::Attributes::UnicodePassword.new(@object, @attr_ldap_name)
+    @unicode_password = AD::Schema::AttributeTypes::UnicodePassword.new(@object, @attr_ldap_name)
   end
   subject{ @unicode_password }
 

@@ -8,7 +8,7 @@ class ArrayTest < Assert::Context
     @object = mock()
     @object.stubs(:dn).returns('something')
     @object.stubs(:fields).returns({ @attr_ldap_name => @values })
-    @array = ActiveDirectory::Attributes::Array.new(@object, @attr_ldap_name)
+    @array = AD::Schema::AttributeTypes::Array.new(@object, @attr_ldap_name)
   end
   subject{ @array }
 
@@ -18,8 +18,8 @@ class ArrayTest < Assert::Context
     assert_equal 'array', subject.class.key
   end
 
-  should "return values as 'ActiveDirectory::Attributes::String'" do
-    assert_equal ActiveDirectory::Attributes::String, subject.item_class
+  should "return values as 'AD::Schema::AttributeTypes::String'" do
+    assert_equal AD::Schema::AttributeTypes::String, subject.item_class
   end
 
   should "return correct value from field" do
