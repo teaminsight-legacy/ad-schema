@@ -6,15 +6,15 @@ module AD
 
       class Dn < AD::Schema::AttributeTypes::String
         key "dn"
-        
+
         def value=(new_value)
           super(new_value)
           @associated = nil
         end
-        
+
         def associated
           if self.value
-            @associated ||= AD::Framework::StructuralClass.find(self.value)
+            @associated ||= self.object.class.find(self.value)
           end
         end
 
