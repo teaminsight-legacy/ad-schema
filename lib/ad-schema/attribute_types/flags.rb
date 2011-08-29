@@ -27,6 +27,13 @@ module AD
         def value
           self
         end
+        
+        def inspect
+          values_string = (self.accepted_values.collect do |name, bit|
+            "#{name}?: #{self.send(name).inspect}"
+          end).sort.join(", ")
+          [ "#<#{self.class} ", "value: #{@value.inspect}, ", values_string, ">" ].join
+        end
 
         protected
 
@@ -47,6 +54,7 @@ module AD
               def #{name}
                 ((@value || 0) & #{bit}) != 0
               end
+              alias :#{name}? :#{name}
 
               def #{name}=(new_value)
                 boolean = self.to_boolean(new_value)
