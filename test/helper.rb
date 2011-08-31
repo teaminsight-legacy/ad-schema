@@ -29,19 +29,9 @@ if !$LOAD_PATH.include?(root_path)
 end
 require 'ad-schema'
 
-class Assert::Context
-  include Mocha::API
-end
-
 require 'test/support/state'
 require 'test/support/factory'
 require 'test/support/seed'
-
-if defined?(Assert)
-  class Assert::Context
-    include Mocha::API
-  end
-end
 
 AD::Framework.configure do |config|
   config.ldap do |ldap|
@@ -58,6 +48,10 @@ AD::Framework.configure do |config|
 end
 
 if defined?(Assert)
+  class Assert::Context
+    include Mocha::API
+  end
+  
   Assert.suite.setup do
     puts "\nSeeding the ldap database..."
     time = Benchmark.measure{ Seed.up }
