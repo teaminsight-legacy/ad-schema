@@ -1,6 +1,7 @@
 require 'ad-schema/attribute_types/integer'
 require 'ad-schema/attribute_types/boolean'
 
+require 'ad-schema/attribute_types/flags/sam_account_type'
 require 'ad-schema/attribute_types/flags/system_flags'
 require 'ad-schema/attribute_types/flags/user_account_control'
 
@@ -9,6 +10,7 @@ module AD
     module AttributeTypes
 
       class Flags < AD::Schema::AttributeTypes::Integer
+        extend AD::Schema::AttributeTypes::Flags::SAMAccountType
         extend AD::Schema::AttributeTypes::Flags::SystemFlags
         extend AD::Schema::AttributeTypes::Flags::UserAccountControl
         
@@ -16,9 +18,9 @@ module AD
 
         attr_accessor :meta_class, :accepted_values
 
-        def initialize(object, attr_ldap_name)
+        def initialize(object, attr_ldap_name, value = nil)
           self.meta_class = class << self; self; end
-          self.accepted_values = self.class.defined_values[attr_ldap_name.to_sym]
+          self.accepted_values = (self.class.defined_values[attr_ldap_name.to_sym] || [])
           super
 
           self.define_value_methods!
@@ -73,6 +75,7 @@ module AD
           def defined_values
             unless @defined_values
               @defined_values = {}
+              @defined_values.merge!(self.sam_account_type_values)
               @defined_values.merge!(self.system_flags_values)
               @defined_values.merge!(self.user_account_control_values)
             end

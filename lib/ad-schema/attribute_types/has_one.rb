@@ -4,8 +4,8 @@ module AD
   module Schema
     module AttributeTypes
 
-      class Dn < AD::Schema::AttributeTypes::String
-        key "dn"
+      class HasOne < AD::Schema::AttributeTypes::String
+        key "has_one"
 
         def value=(new_value)
           super(new_value)
@@ -59,4 +59,4 @@ module AD
   end
 end
 
-AD::Framework.register_attribute_type(AD::Schema::AttributeTypes::Dn)
+AD::Framework.register_attribute_type(AD::Schema::AttributeTypes::HasOne)

@@ -1,7 +1,7 @@
 AD::Framework.register_attributes([
   { :name => "address",             :ldap_name => "streetaddress",            :type => "string" },
   { :name => "home_address",        :ldap_name => "homepostaladdress",        :type => "string" },
-  { :name => "assistant_dn",        :ldap_name => "assistant",                :type => "dn" },
+  { :name => "assistant_dn",        :ldap_name => "assistant",                :type => "has_one" },
   { :name => "company_name",        :ldap_name => "company",                  :type => "string" },
   { :name => "country_code",        :ldap_name => "countrycode",              :type => "integer" },
   { :name => "country_name",        :ldap_name => "c",                        :type => "string" },
@@ -14,7 +14,7 @@ AD::Framework.register_attributes([
   { :name => "first_name",          :ldap_name => "givenname",                :type => "string" },
   { :name => "initials",            :ldap_name => "initials",                 :type => "string" },
   { :name => "locality_name",       :ldap_name => "l",                        :type => "string" },
-  { :name => "manager_dn",          :ldap_name => "manager",                  :type => "dn" },
+  { :name => "manager_dn",          :ldap_name => "manager",                  :type => "has_one" },
   { :name => "organizational_unit", :ldap_name => "ou",                       :type => "string" },
   { :name => "other_mailbox",       :ldap_name => "othermailbox",             :type => "string" },
   { :name => "middle_name",         :ldap_name => "middlename",               :type => "string" },

@@ -13,8 +13,8 @@ module AD
 
         def initialize(object, attr_ldap_name)
           self.item_class = case attr_ldap_name.to_sym
-          when :proxyaddresses
-            AD::Schema::AttributeTypes::String
+          when :showinaddressbook, :mssfu30posixmemberof, :memberof
+            AD::Schema::AttributeTypes::HasOne
           else
             AD::Schema::AttributeTypes::String
           end
@@ -30,10 +30,10 @@ module AD
         end
 
         def value=(new_value)
-          values = [*new_value].collect do |value|
+          values = [*new_value].compact.collect do |value|
             self.item_class.new(object, attr_ldap_name, value)
           end
-          super(values.compact)
+          super(values)
         end
 
         def ldap_value=(new_value)

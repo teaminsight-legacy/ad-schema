@@ -9,14 +9,8 @@ module AD
     class Person < AD::Schema::Top
 
       ldap_name "person"
-
-      rdn :name
-
       attributes :last_name, :phone_number
-
-      write_attributes :password
-
-      #requires :name
+      must_set :name
 
     end
 

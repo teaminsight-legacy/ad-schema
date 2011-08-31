@@ -8,8 +8,6 @@ module AD
       class Timestamp < AD::Framework::AttributeType
         key "timestamp"
 
-        attr_accessor :value
-
         def value=(new_value)
           super(convert(new_value.to_i))
         end
