@@ -1,20 +1,20 @@
 require 'assert'
 
-module AD::Schema::AttributeTypes::Flags::UserAccountControl
+module AD::Schema::AttributeTypes::Flags::SAMAccountType
 
   module Values
-    extend AD::Schema::AttributeTypes::Flags::UserAccountControl
+    extend AD::Schema::AttributeTypes::Flags::SAMAccountType
   end
 
   class BaseTest < Assert::Context
-    desc "the flags attribute type as user account control"
+    desc "the flags attribute type as sam account type"
     setup do
-      attr_ldap_name = :useraccountcontrol
-      @value = 544
+      attr_ldap_name = :samaccounttype
+      @value = 805306368
       @structural_class = Factory.structural_class
       @instance = @structural_class.new
       @flags = AD::Schema::AttributeTypes::Flags.new(@instance, attr_ldap_name, @value)
-      @accepted = Values.user_account_control_values[attr_ldap_name]
+      @accepted = Values.sam_account_type_values[attr_ldap_name]
     end
     subject{ @flags }
 
