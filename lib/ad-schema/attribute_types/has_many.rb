@@ -7,6 +7,7 @@ module AD
       class HasMany < AD::Schema::AttributeTypes::Array
         key "has_many"
 
+
       end
 
     end
