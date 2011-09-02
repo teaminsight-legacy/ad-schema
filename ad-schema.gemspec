@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "ad-framework", "~>0.1.0"
 
-  s.add_development_dependency "assert",  "~>0.3.0"
+  s.add_development_dependency "assert",  "~>0.4.0"
   s.add_development_dependency "log4r",   "~>1.1.9"
   s.add_development_dependency "mocha",   "~>0.9.12"
 end
